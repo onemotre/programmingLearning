@@ -1,3 +1,12 @@
+# Self-Try
+
+> to record some knowledge and experiences while I'm trying by myself
+
+## 2021.02.07 Code Point
+
+ 源代码
+
+```java
 import java.util.*;
 
 /**
@@ -61,3 +70,93 @@ public class codePoint{
         }       
    }
 }
+
+```
+
+### record
+
+#### 输入不同数据类型
+
+```java
+/**
+*构造器构造输入对象
+**/
+import java.util.*
+Scanner in = new Scanner(System.in);
+```
+
+##### String
+
+```java
+String typeString = in.next();
+```
+
+
+
+##### Integer
+
+```java
+int typeInteger = in.nextInt():
+```
+
+
+
+#### 用键盘输入数组
+
+```java
+import java.util.*
+Scanner in = new Scanner(System.in);
+
+int lengthOfInteger = in.nextInt();
+int[] number = new int[lengthOfInteger];
+for (int i = 0; i<=lengthOfInterger; i++){
+    nember[i] = x.nextInt();
+}
+```
+
+
+
+#### 字符串转换成其他格式
+
+```java
+String s = "123";
+
+byte b = Byte.parseByte(s);
+short t = Short.parseShort(s);
+int i = Integer.parseInt(s);
+long l = Long.parseLong(s);
+Float f = Float.parseFloat(s);
+Double d = Double.parseDouble(s);
+boolean bo = Boolean.parseBoolean(s);
+char c = Character.parseCharacter(s);
+```
+
+
+
+#### 数字转化成字符串
+
+```java
+String s = String.valueOf(value);
+```
+
+
+
+#### 遍历字符串码点 
+
+```java
+for(int i = 0; i<=sentence.length()-1; ){
+	int cp = sentence.codePointAt(i);
+	if(Character.isSupplementaryCodePoint(cp))  i+=2;
+	else i++;
+	System.out.println(cp);
+}
+```
+
+
+
+#### 将码点转换成字符串 
+
+```java
+String str2 = new String(codePoints,0,codePoints.length); //codePoints为每一个组为单独编码的数组
+```
+

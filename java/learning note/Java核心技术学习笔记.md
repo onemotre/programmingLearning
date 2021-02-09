@@ -1,4 +1,4 @@
-## Core Java Volume 
+## Core Java Volume
 
 > summery important point in this book
 
@@ -346,3 +346,251 @@ String str = new String(codePoints, 0, codePoints.length);
 
 > `java.lang.String`
 
+- `char charAt(int index)` 
+
+  返回给定位置的代码单元。
+
+- `int codePointAt(int index)` 
+
+  返回从给定位置开始的码点
+
+- `int offsetByCodePoints(int staetIndex, int cpCount)` 
+
+  返回从`starIndex`码点开始，`cpCount`个码点后的码点索引
+
+  码点索引（`index`）：某字符在某点的数字位置
+
+  ```java
+  String greeting = "welcome";
+  int index = greeting.offsetByCodePoints(0,3);
+  System.out.println(index);
+  int cp = greeting.codePointAt(index);
+  System.out.println(cp);
+  ```
+
+  运行结果：
+
+  ```bash
+  3
+  99
+  ```
+
+- `int copareTo(String other)` 
+
+  按照字典顺序，如果字符串位于`other`之前吗，返回一个负数，如果字符串位于`other`之后，返回一个正数；如果两个字符串相等则返回0
+
+- `IntSteam coidePoints()` 
+
+  将一个字符串的码点作为一个流返回。调用`toArray`将它们放在一个数组中
+
+- `new String(int[] codePoints, int offset, int count)`
+
+  同数组中从`offset`开始的`count`个码点构造一个字符串
+
+- `boolean empty()` 与 `boolean blank()` 
+
+  如果字符串为空，或者有空格组成，则返回`true`
+
+- `boolean equals(Object other)`
+
+  如果字符串与`other`相等，返回`true`
+
+- `booleanequalsIgnoreCase(String other =)` 
+
+  如果字符串与`other`相同（忽略大小写），返回`true`
+
+- `boolean startsWith(String prefix)` 与 `boolean endsWith(String suffix)` 
+
+  如果字符串以`prefix`开头或`suffix`结束，则返回`true`
+
+- `int indexOf(String str)`、 `int indexOf(String str, int fromIndex)`、 `int indexOf(int cp)`、 `int indexOf(int cp, int fromIndex)`
+
+  返回与字符串`str`或码点`cp`匹配的第一个字符串的开始位置。从索引0或`fromIndex`开始匹配。如果原始字符串中不存在`str`则返回-1
+
+- `int lastIndexOf(String str)`、 `int lastIndexOf(String str, int fromIndex)`、 `int lastindexOf(int cp)`、 `int lastindexOf(int cp, int fromIndex)`
+
+  返回与字符串`str`或码点`cp`匹配的最后一个字串的开始位置。从原始字符串末尾或`fromIndex`开始匹配
+
+- `int length()` 
+
+  返回字符串代码单元的个数
+
+- `int codePointCount(int startIndex, int endIndex)` 
+
+  返回`startPointCount`和`endIndex - 1`之间的码点个数
+
+- `String replace(CharSequence oldString, CharSequence newString)`
+
+  返回一个新字符串。这个字符串同`newString`代替原始字符中所有的`oldString`可以用`String`或`StringBuilder`对象作为`CharSequence` 参数
+
+- `String substring(int beginIndex)` 与 `String substring(int beginIndex, int endIndex)`
+
+  返回一个新字符串。这个字符串包含原始字符串中从`beginIndex`到字符串末尾或`endIndex - 1`的所有代码单元
+
+- `String toLowerCase()` 与 `String toUpperCase()`
+
+  返回一个新字符串。这个字符串将删除原始字符串中的大写字母改为小写，或者将原始字符串中的所有小写字母改为大写字母
+
+- `String trim()`与 `String strip()` 
+
+  返回一个新字符串。这个字符串将删除原始字符串头部和尾部小于等于U+0020的字符（`trim`）和空格（`strip`）
+
+- `String join(CharSequence delimiter, CharSequence... elements)`
+
+  返回一个新字符串，用给定的定界符链接所有元素 __Note：__charsequence 意为字符序列；delimiter 意为定界符；charsequence...elements 意思是字符序列组
+
+  具体实例1：给日期加上分隔符
+
+  ```java
+  String date = String.join("/","2021","02","08");
+  ```
+
+  输出：
+
+  ```bash
+  2021/02/09
+  ```
+
+  具体实例2：在单词之间增加空格
+
+  ```java
+  String[] greeting = {"welcome", "to", "my", "blog"};
+  String dilimiter = " ";
+  String after = String.join(dilimiter, greeting);
+  
+  for (String elemet : greeting)
+  	System.out.print(elemet);
+  System.out.println(" "); //输出：welcometomyblog
+  
+  System.out.println(after); //输出：welcome to my blog
+  ```
+
+- `String repeat(int cout)` 
+
+  返回一个字符串将当前字符串重复`count`次
+
+
+
+##### 3.6.8 阅读联机API文档
+
+jdk15 官方API文档 [link](https://docs.oracle.com/en/java/javase/15/docs/api/index.html)
+
+
+
+#### 3.7输入与输出
+
+##### 3.7.1 读取输入
+
+`Scanner` 与“标准输入流`System.in`”关联
+
+```java
+import java.util.*;
+Scanner in = new Scanner(System.in);
+String str = in.next(); //以空格为分隔符
+String str = in.nextLine(); //以换行符为分隔符
+```
+
+##### Scanner API
+
+- `Scanner(InputStream in)`
+
+  用给定的输入流创建一个`Scanner`对象（一般为标准输入流`System.in`）
+
+- `String nextLine()`
+
+  读取下一行的内容
+
+- `String next()`
+
+  读取输入的下一个单词（以空格为分隔符）
+
+- `int nextInt()` 与 `double nextDouble()`
+
+  读取并转换下一个表示正数或浮点数的字符序列
+
+- `boolean hasNext()`
+
+  检测输入中是否还有其他单词
+
+- `boolean hasNextInt()` 与 `boolean hasNextDouble()`
+
+  检测是否还有下一个表示整数或浮点数的字符序列
+
+
+
+##### 3.7.2 格式化输出
+
+- 进制转换
+
+  | 转换符 |              类型              |       示例        |
+  | :----: | :----------------------------: | :---------------: |
+  |   d    |           十进制正数           |        159        |
+  |   x    |          十六进制正数          |        9f         |
+  |   o    |           八进制正数           |        237        |
+  |   f    |           定点浮点数           |       15.9        |
+  |   e    |           指数浮点数           |     1.59e+01      |
+  |   g    | 通用浮点数（e和f中较短的一个） |        --         |
+  |   a    |         十六进制浮点数         |    0x1.fccdp3     |
+  |   s    |             字符串             |       hello       |
+  |   c    |              字符              |         h         |
+  |   b    |              布尔              |       true        |
+  |   n    |             散列码             |      42628b2      |
+  | tx或Tx |     日期时间（T强制大写）      | 应当使用java.time |
+  |   %    |             百分号             |         %         |
+  |   n    |         与平台有关的行         |        --         |
+
+
+
+- 用于`printf`的表标志
+
+  |      标志       |          目的          | 示例 |
+  | :-------------: | :--------------------: | :--: |
+  |        +        |  打印正数和负数的符号  |      |
+  | 空格（stricp）  |   在正数之前添加空格   |      |
+  |        0        |      数字前面补0       |      |
+  |        -        |         左对齐         |      |
+  |        (        |    将负数括在括号里    |      |
+  |        ,        |     添加分组分隔符     |      |
+  | #（对有f格式）  |       包含小数点       |      |
+  | #（对x或0格式） |     添加前缀0x或0      |      |
+  |        $        | 指定要格式化的参数索引 |      |
+  |        <        |  格式化前面说明的数值  |      |
+
+
+
+##### 3.7.3 文件输入与输出
+
+- 读取一个文件需要构造一个Scanner对象
+
+  ```java
+  Scanner in = new Scanner(Path.of("myfile.txt"),StandardCharsets.UTF_8);
+  ```
+
+  __Note：__如果文件名中包含反斜杠符号，要在每个满斜杠之前再加一个额外的反斜杠转义
+
+- 写入一个文件需要`PrintWriter`对象
+
+  ```java
+  PrintWriter out = new PrintWriter("myfile.txt", StandaedCharsets.UTF_8);
+  ```
+
+**important：**不能用不存在的文件构造一个Scanner或PrintWriter。建议在main方法中用`throw`来进行标记
+
+```java
+public static void main(String[] args) throw IOException {
+    Scanner in = new Scanner(Path.of("myfile.txt"),StandardCharsets.UTF_8);
+    ...
+}
+```
+
+得到当前文件所在位置：
+
+```java
+String dir = System.getProperty("user.dir");
+```
+
+或在命令行中输入
+
+```bash
+java MyProg
+```
