@@ -2,7 +2,7 @@
 
 > summery important point in this book
 
-### Java 的基本程序设计结构
+### 第三章 Java 的基本程序设计结构
 
 #### 3.1 简单的Java应用程序
 
@@ -168,6 +168,8 @@ function getBaseLog(x, y) {
 `Math.E` 常量 e 的近似值
 
 `Math.roud(x)` 对x进行舍入运算，得到最接近的整数
+
+`Math.random` 生成一个0，1之间的随机浮点数
 
 
 
@@ -594,3 +596,375 @@ String dir = System.getProperty("user.dir");
 ```bash
 java MyProg
 ```
+
+
+
+#### 3.8 控制流程
+
+##### 3.8.1 块的作用域
+
+不能再嵌套的两个块中声明同名的变量
+
+
+
+##### 3.8.2 条件语句
+
+```java
+if (condition) statement
+
+if (condition) statement1 
+else statement2
+```
+
+
+
+##### 3.8.3 循环
+
+```java
+while (condition) statement //当condition判定为true时进行
+    
+do statement while(condition) //先执行语句再进行循环体哦阿健
+```
+
+
+
+##### 3.8.4 确定循环 
+
+```java
+for(int i = 0; i <= 10; i++)
+```
+
+
+
+##### 3.8.5 多重选择：`switch`语句
+
+- 示例：菜单系统
+
+```java
+Scanner in = new Scanner(System.in);
+System.out.println("select an option (1,2,3,4)");
+int choice = in.nextInt();
+switch (choice){
+    case 1:
+        ...
+        break;
+    case 2:
+        ...
+        break;
+    case 3:
+        ...
+        break;
+    case 4:
+        ...
+        break;
+    default:
+        //bad input
+        ... 
+        break;
+}
+```
+
+__Note：__如果没有相应的`case`与参数对应，则会执行`default`中的语句；`case`中用`break`代替了块的作用
+
+__WARNING：__避免触发多个`case`分支（或者没有在最后添加break）编译代码（shell）中，添加`-Xlint:fallthrough`
+
+```bash
+java -Xlint:fallthrough Test.java
+```
+
+
+
+##### 3.8.6 中断控制流程的语句
+
+- `break` 带标签的操作
+
+  可用于检测一些额外的不可预料的事（用户输入错误等等）
+
+  ```java
+  Scanner in = new Scanner(System.in);
+  int n;
+  read_data:
+  while(...){
+      for(...){
+          System.out.println("Enter anumber >=0:");
+          n = in.nextInt();
+          if(n < 0)
+              	break read_data; //将跳转到第三行
+      }
+  }
+  //可在这里检测额外条件
+  if(n>0){
+      //处理
+  }
+  else{
+      //处理
+  }
+  ```
+
+- ` continue`可将控制转移到最内层循环的首部
+
+  ```java
+  Scanner in = new Scanner(System.in);
+  while(sum < goal){
+      System.out.print("Enter a number:");
+      n = in.nextInt();
+      if (n > 0) continue; //跳过之后的所有语句到该首部
+      sum += n;
+  }
+  ```
+
+  
+
+#### 3.9 大数（`BigInteger`）
+
+用大数内中的`add` `multiply`方法对大数进行操作
+
+大数位于包`java.math.*`
+
+```java
+import java.math.*;
+
+BigInteger c = a.add();
+BigInteger d = c.multiply(b.add(BigInteger.valueOf(2))); //d = c * （b + 2）
+```
+
+
+
+##### `BigInteger` API
+
+- `BigInteger add(BigInteger other)` `BigInteger substract(BigInteger other)` `BigIntegeer multiply(BigInteger other)` `BigIntegeer divide(BigInteger other)` `BigInteger mod(BigInteger other)`
+
+  返回这个大整数和另一个大整数的和、差、积、商以及余数
+
+- `BigInteger sqrt()`
+
+  得到这个`BigInteger`的平方根
+
+- `int compareTo(BigInteger other)`
+
+  比较这两个大数与另一个大整数，相等返回0；这个大整数小于`other`返回负数；否则返回正数
+
+- `static BigInteger valueOf(long x)` 
+
+  返回值等于x的大整数
+
+
+
+
+#### 3.10 数组
+
+##### 3.10.1 声明数组 
+
+```java
+int[] a; //不完整，需要初始化
+int[] a = new int[100]; //数组大小可用参数指定
+int[] smallPrimes = {2,3,4,5,6,};
+new int[]{1,2,3,4}; //匿名数组
+```
+
+
+
+##### 3.10.2 访问数组元素
+
+- 添加元素（示例初始化数组）
+
+  ```java
+  int[] a= new int[100];
+  for(int i = 0;i < 100; i++)
+      a[i] = 0;
+  ```
+
+
+
+##### 3.10.3 `for each` 循环
+
+- 遍历数组
+
+  ```java
+  for(variable : collection) statement //parm variable用来暂时储存collection中单独的元素
+  ```
+
+- 遍历数组并打印所有值
+
+  ```java
+  //for each
+  for(element : a)
+      System.out.println(element);
+  
+  //传统for循环
+  for(int i = 0; i < a.length;i++)
+      System.out.println(a[i]);
+  
+  //Array类中的toString方法
+  System.out.println(Array.toString(a));
+  ```
+
+  Array类中的toString方法：返回一个包含中括号，逗号，数组所有值的字符串
+
+  ```java
+  Array.toString(collection)
+  ```
+
+
+
+##### 3.10.4 数组拷贝
+
+__Note：__如果只是用等号来进行拷贝的话，两个数组的值不管什么时候都将相同
+
+```java
+int[] luckNumber = smallPrimes;
+luckyNumbers[5] = 12; //现在smallPrimes[5]的值也为12
+```
+
+- 如果只希望拷贝数组
+
+  ```java
+  int[] copiedLuckyNumbers = Arrays.copyOf(luckNumbers, luckyNumbers.length);
+  ```
+
+  如果长度小于原始数组的长度，只拷贝前面的值
+
+
+
+##### 3.10.5 命令行参数 
+
+源代码：
+
+```java
+public class Message
+{
+    public static void main(String[] atgs)
+    {
+        if(args.length == 0|| args[0].equals("-h"))
+            System.out.print("hello");
+        else if (args[0].equals("-g"))
+            System.out.print("Goodbye,");
+        for(int i = 1; i < args.length;i++)
+            System.out.print(" " + args[i]);
+        System.out.println("!");
+    }
+}
+```
+
+调用程序时如果使用参数`-g`
+
+```bash
+java Message -g cruel wolrd
+```
+
+则args数组包含内容：
+
+```bash
+args[0]:"-g"
+args[1]:"cruel"
+args[2]:"world"
+```
+
+这个程序显示下面消息
+
+```bash
+Goodbye, cruel world!
+```
+
+
+
+##### 3.10.6 数组排序
+
+- 用sort方法进行数组排序
+
+  ```java
+  int[] a= new int[100];
+  ...
+  Arras.sort(a)
+  ```
+
+note:`Math.random`方法可返回一个0，1之间的浮点数
+
+
+
+##### Array API
+
+在方法返回类型之前加上`static`表示这个方法是静态的
+
+- `static String toString(xxx[] a)`
+
+  返回包含a中元素的一个字符串，这些元素用中括号包围，用逗号隔开，在这个方法以及后面的方法中类型xxx个意识`int` `long` `short` `char` `byte` `boolean` `float` 或 `double`
+
+- `static xxx[] copy Of(xxx[] a, int end)` `static xxx[] copuOfRange(xxx[] a,int start, int end)`
+
+  返回与a类型相同的一个数组，其长度为length或者end-start，数组元素为a的值。如果end大于a.length，就会填充0或false
+
+- `static void sort(xxx[] a)`
+
+  使用优化的快速排序算法对数组进行排序。
+
+- `static int binarySearch(xxx[] a,xxx v)` `static int binarySearch(xxx[] a, int start, int end, xxx v)`
+
+  使用二分查找算法在有序数组a中查找值v如果找到v，则返回对应的下标；否则，注意返回一个负数值r。-r-1 是v应插入的位置（保持a的有序性）
+
+- `static void fill(xxx[] a,xxx v)`
+
+  将数组的所有数据元素设置为v
+
+- `static boolean equals(xxx[] a, xxx[] b)`
+
+  如果两个数组大小相同，并且下标相同的元素都对应相等，返回`true`
+
+
+
+##### 3.10.7 多维数组
+
+二维数组也称为举证，可以用来储存信息
+
+- 声明多维数组
+
+  ```java
+  int[][] a = new int[NUMBER][NUMBER];
+  ```
+
+- 为多维数组赋值
+
+  ```java
+  int[][] magicSquare = 
+  {
+      {16, 3, 2, 13},
+      {5, 10, 11, 8},
+      {9, 6, 7, 12},
+      {4, 15, 14, 1}
+  };
+  ```
+
+  
+
+### 第四章 对象与类
+
+> - 面向对象程序设计入门；
+> - 如何创建标准java类库中类的对象；
+> - 如何编写自己的类
+
+#### 4.1 面对对象程序设计概述
+
+面对对象程序设计（object-oriented programming, OOP）
+
+##### 4.1.1 类（class）
+
+###### 概念
+
+- 类（class）
+
+  是构造对象的模板或蓝图
+
+  由类_构造_（construct）对象的过程称为创建类的_示例_（instance）
+
+- 封装（encapsulation）
+
+  将数据和行为组合在一个包中，并对对象的使用这隐藏具体的实现方式。
+
+  对象中的数据称为_实例字段_（instance field）
+
+  操作数据的过程称为_方法_（method）
+
+  特定的对象都有一组特点过的示例字段值，这些值组成的集合叫做这个对象的_状态_（state）
+
+  __Note：__可将这些示例字段比作c++中的数据结构，
+
