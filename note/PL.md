@@ -210,6 +210,14 @@ java hello
 
 
 
+### python 3.8
+
+linux 本身自带python无需额外安装
+
+
+
+
+
 ### 安装集成开发环境（Vscode）
 
 官网下载安装包 [link](https://code.visualstudio.com/)
