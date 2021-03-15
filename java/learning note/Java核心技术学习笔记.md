@@ -1894,5 +1894,196 @@ package com.mycompany;
 ##### 为了类能够被多个程序共享，需要做到以下几点 ：
 
 1. 把类文件放到一个目录中，例如`/home/user/classdir`，这个目录是包书状结构的*基*目录，如果希望那个增加`com.horstmann.corejava.Employee`类，那么Employee.class类文件必须位于目录`/home/user/clasdir/com/horstmann/corejava中
+
 2. JAR文件放在一个目录中，例如：`home/user/archives/`
+
 3. 设置*类路径（clas path）*。类路径是所有包含类文件的路径的集合
+
+   在UNIX中用`:`隔开 *example：*`c:/classdir:.:/home/user/archives/archive.jar`
+
+   在Windows中用`;`隔开 *example：*`c:\classdir;.;c:\archives\archive.jar`
+
+   不论UNIX还是Windows都用`.`表示当前路径
+
+##### 类路径需要包括：
+
+1. 基目录`/home/user/classdir`或`c:\classdir`
+
+2. 当前目录`.`
+
+3. JAR文件`/home/user/archives/archive.jar`或`c:\archives\archive.jar`
+
+   可以在JAR文件目录中制定通配符：
+
+   `/home/user/archives/'*'`或`c:\archives\*`
+
+   UNIX中必须加`''`防止shell扩展
+
+
+
+#### 4.7.7 设置类路径
+
+通过`-classpath(或-cp或者java9中的--class-path)`选项选择指定类的目录
+
+```bash
+java -classpath c:/classdir:.:/home/user/archives/archive.jar Myprog
+```
+
+- 在bash中
+
+  ```bash
+  export CLASSPATH=/home/user/archives/archive.jar
+  ```
+
+- 在Windows shell中
+
+  ```shell
+  set CLASSPATH=c:\archives\archive.jar
+  ```
+
+
+
+### 4.8 JAR文件
+
+#### 4.8.1 创建一个JAR文件
+
+使用默认`jar`制作
+
+```bash
+jar cvf 【jarFileName】 【file1】 【file2】
+```
+
+*example：*
+
+```bash
+jar cvf CalculatorClasses.jar *.class icon.gif
+```
+
+通常命令格式：
+
+```bash
+jar options file1 file2
+```
+
+| 选项 |                             说明                             |
+| :--: | :----------------------------------------------------------: |
+|  c   | 创建一个新的或者空的存档文件并加入文件。如果制定文件名是目录，jar会对他们进行归档处理 |
+|  C   | 临时改变目录例如`jar cvf jarFileName.jar -C classes *.class`切换到classes子目录以便增加类文件 |
+|  e   |                  在清单文件中创建一个入口点                  |
+|  f   | 指定JAR文件名作为第二个命令行参数（如果没有这个参数jar命令会将结果写至标准输出（创建jar文件时）或者从标准输入读取（在解压或者列出JAR内容时） |
+|  i   |           建立索引文件（用于加快大型归档中的查找）           |
+|  m   | 将一个清单文件添加到jar文件中，清单是对归档内容和来源的一个说明。每个归档有一个默认的清单文件。但是，如果想验证归档文件的内容，可以提供自己的清单文件 |
+|  M   |                     不为条目创建清单文件                     |
+|  t   |                          显示内容表                          |
+|  u   |                    更新一个已有的JAR文件                     |
+|  v   |                      生成详细的输出结果                      |
+|  x   | 解压文件，如果提供一个或多个文件名，只解压这些文件；否则解压所有文件 |
+|  0   |                    储存，但不进行ZIP压缩                     |
+
+
+
+#### 4.8.2 清单文件
+
+清单文件一般被命名为`MANIFEST.MF`，位于特殊目录`META.INF`子目录中
+
+第一节称为*主节（main section）*，作用于整个JAR文件。随后的条目用来制定命名实体的属性，如但个文件、包或者URL。他们必须以一个Name条目开始。节与节之间用空行分开
+
+```
+Mainfest-Version: 1.0
+【lines descibeing this archive】
+
+Name: Woozle.class
+【lines descibeing this file】
+Name: com/mycompany/mypkg/
+【lines descibeing this package】
+```
+
+如果想编辑清单文件，需要将希望添加到清单文件中的行放到文本文件中，运行：
+
+```bash
+jar cfm jarFileName manifestFileName
+```
+
+例如创建一个包含清单文件的JAR文件：
+
+```bash
+jar cfm Myarchive.jar manifest.mf com/mycompany/mypkg/*.class
+```
+
+更新一个已有的JAR文件的清单，则需要将增加的部分放到一个文本文件中，然后执行：
+
+```bash
+jar ufm Myarchive.jar manifest.mf
+```
+
+
+
+#### 4.8.3 可执行JAR文件
+
+可以使用jar命令中的e选项指定程序的入口点
+
+```bash
+jar cvfe Myprogram.jar com.myconpany.mypkg,MainAppClass 【files to add】
+```
+
+或者在清单文件中制定程序的主类，包括以下形式的语句
+
+```bash
+Main-Class: com.mycompany.mypkg.MainAppClass
+```
+
+**Note：**不要为主类名增加扩展名：`.class`
+
+##### warning：
+
+清单文件的最后一行必须以换行符结束。否则，清单文件将无法被正确的读取。常见的一个错误是创建了一个只包含`Main-Class`行而没有行结束符的文本文件
+
+
+
+不论用哪种方法，用户可以简单的通过下面的命令启动程序：
+
+```bash
+java -jar MyProgram.jar
+```
+
+- 在Windows中，java运行时安装程序将为`.jar`扩展名创建一个文件关联，会用`javaw -jar`命令启动文件（`javaw`不会打开shell窗口）
+- 在Mac OS X中，操作系统可以直接识别`jar`文件，双击文件就可执行程序
+
+
+
+#### 4.8.4 多版本JAR文件（multi-release JAR）
+
+为了保证向后兼容，额外的文件放在`META-INF/version`目录中
+
+##### 不同版本的类文件打包
+
+- 增加
+
+  ```bash
+  jar uf Myprogram.jar --release 9 Application.class
+  ```
+
+- 从头构建多版本JAR文件，可以使用`-C`标识
+
+  ```bash
+  jar cf Myprogram.jar -C bin/8 . --release 9 -C bin/9 Application.class
+  ```
+
+- 面向不同版本进行编译
+
+  ```bash
+  javac -d bin/8 --release 8 ...
+  ```
+
+  
+
+#### 4.8.5 关于命令行选项的说明
+
+java开发包选项一直以来都使用但个短横线加多个字母选项名的形式：
+
+```bash
+java -jar ...
+javac -Xlint.unchecked -classpath ...
+```
+
+jar命令是例外
