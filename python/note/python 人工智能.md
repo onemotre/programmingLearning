@@ -11,7 +11,7 @@
 >
 > 1. 智能程序设计
 
-## 1.在屏幕上打印的文本
+## 1.first class
 
 ### 1.1 python程序设计语言
 
@@ -67,7 +67,7 @@ print("hello" + " " + myname)
 
 
 
-##  2. 数学运算
+###  1.2 数学运算
 
 - 算术运算
 - 关系运算
@@ -79,10 +79,56 @@ print("hello" + " " + myname)
 
 
 
-## 3. 输入
+### 1.3 输入
 
 ```python
 username = intput("Enter your name here")
 print("Welcome", username)
 ```
+
+
+
+## 2. second class
+
+### 2.1培养优秀的程序员（代码分块）
+
+### 2.2 多重分支语句
+
+### 2.2.1 if语句
+
+```python
+age = 21
+
+if age > 20:
+    print('你太过分了')
+```
+
+### 2.2.2 强制类型转换 
+
+```python
+//judge if you can get into internet bar
+age = int(input("type your age here"))
+if age >= 18:
+    print("you are allowed")
+else:
+    print("you are not allowed")
+```
+
+**import:** 同种类型的变量不能进行强制类型转换：
+
+```python
+a = int(1)
+b = int(a)//ERROR:SyntaxError
+```
+
+报错：
+
+```bash
+File "rty.py", line 4
+    print b
+          ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print(b)?
+```
+
+
 

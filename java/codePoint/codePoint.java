@@ -1,3 +1,5 @@
+package codePoint;
+
 import java.util.*;
 
 /**
@@ -58,6 +60,7 @@ public class codePoint{
             else{
                 break;
             }
-        }       
+        }
+        in.close();       
    }
 }

@@ -1,3 +1,5 @@
+package equalAnalysis;
+
 import java.util.*;
 
 /**
@@ -35,5 +37,6 @@ public class equalAnalysis {
             System.out.print(element + " ");
         for(char element2 : operator)
             System.out.print(element2 + " ");
+        in.close();
     }
 }

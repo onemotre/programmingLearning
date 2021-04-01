@@ -1865,6 +1865,13 @@ public class Employee
 
 测试包放在`./`目录中，可以检验`./com/.../`的类
 
+##### 编译或运行类
+
+```bash
+javac com/mycompany/PayrollApp.java
+java com.mycompany.PayrollApp
+```
+
 ##### warning
 
 编译器在编译源文件的时候**不**检查目录结构。假定一个源文件开头有以下命令：
@@ -2087,3 +2094,148 @@ javac -Xlint.unchecked -classpath ...
 ```
 
 jar命令是例外
+
+
+
+### 4.9 文件注释
+
+> javadoc 工具的使用
+
+#### 4.9.1 注释的插入
+
+javadoc从以下几项中抽取信息
+
+- 模块
+- 包
+- 公共类与接口
+- 公共的和受保护的字段
+- 公共的和受保护的构造器及方法
+
+##### 4.9.1.1 自由文本
+
+`/** …… */`后面紧跟*自由文本（free-form text）*标记以`@`开始，如`@since`或`@parm`
+
+自由文本第一句应该**为概要性的句子**。javadoc会自动将其转换成概要页
+
+**自由文本当中支持用HTML修饰符：**
+
+1. 用于强调的`<em>...</em>`
+2. 用于着重强调的`<strong>...</strong>`
+3. 用于项目符号列表的`<ul>/<li>`
+4. 用于包含图像的`<img ...>`
+5. 键入等宽代码使用`{@code ...}`不用进行`<`字符的转义
+
+**Note：**如果文档中有到其他文件的连接，这些文件应该放到包含源文件的目录下的一个子目录doc-file中。javadoc会将从源目录敬爱嗯doc-file目录及其拷贝到文档目录中。在连接中需要使用doc-file中的文件。eg：`<img src="doc-file/uml.png"alt="UML diagram">`
+
+
+
+#### 4.9.2 类注释
+
+类注释必须放在import语句之后，类定义之前
+
+```java
+/**
+ * A {@code Card} object represent a playing card, such
+ * as "Queen of Heart". A card has a suit (Diamond, Heart,
+ * Spade or Club) and a value (1 = Ace, 2... 10, 11 = jack, 12 = Queen, 13 = King)
+ */
+public class Card
+{
+    ...
+}
+```
+
+
+
+#### 4.9.3 方法注释
+
+- `@parm` 
+
+  这个标记用于给当前方法的“parmeters”（参数）部分添加一个条目。这个表述可以占据多行，并且用HTML进行标记。一个方法的@parm标记必须放在一起
+
+- `@return`
+
+  给当前方法添加“return”（返回）部分，这个标记可以跨多行，并且使用HTML标记
+
+- `@throws`
+
+  用于添加一个注释
+
+
+
+#### 4.9.4 字段注释
+
+```java
+/** 
+ * The "Heart" card suit
+ */
+public static final int HEART = 1;
+```
+
+
+
+#### 4.9.5 通用注释
+
+- `@since`
+
+  引入这个特性的版本的任何描述
+
+- `@author`
+
+  使版本控制系统能更好的跟踪作者
+
+- `@version`
+
+  对当前版本进行描述
+
+- `@see`与`@link`
+
+  - 连接到javadoc文档的相关部分或外部文档
+
+    ```java
+    @see com.horstmann.corejava.Employee#raiseSalary(double)
+    ```
+
+    可以建立一个到`com.horstmann.corejava.Employee`的`raiseSalary(double)`方法的超链接（用#号分隔类名与方法名）
+
+  - 连接到URL
+
+    ```java
+    @see <a href="www.horstmann.com/corejava.heml">The Core Java home page</a>
+    ```
+
+  - 将文本添加到“see also”部分
+
+    ```java
+    @see "Core Java 2 volume 2"
+    ```
+
+- `{@link entry}`
+
+  在搜索框添加一个条目
+
+
+
+#### 4.9.6 包注释
+
+产生包注释，需要在每一个包目录中添加一个单独的文件：
+
+1. 提供名为`package-info.java`的Java文件。这个文件必须包含一个初始的以`/**`和`*/`界定的javadoc注释，后面一个package语句
+2. 提供一个名为package.html的HTML文件。会自动抽取`<body>...</body>`之间的所有文本
+
+
+
+#### 4.9.7 注释抽取
+
+> 希望HTML文件将放在名为docDirectory的目录下
+
+1. 切换到包含想要生成文档的源文件的目录。例如`com.horstmann.corejava`就必须切换到包含子目录com的目录（如果提供了overiew.html文件的花，这就是这个文件所在的目录）
+
+2. 如果是一个包
+
+   ```bash
+   
+   ```
+
+   
+
