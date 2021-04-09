@@ -7,7 +7,7 @@ public class simpleFrame{
     public static void main(String[] args) {
         EventQueue.invokeLater(()->
         {
-            var frame = new SimpleFrame();
+            var frame = new simpleFrame1();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
             frame.setTitle("My First Frame program");
@@ -16,13 +16,13 @@ public class simpleFrame{
         });
     }
 }
-class SimpleFrame extends JFrame
+class simpleFrame1 extends JFrame
 {
     private static final long serialVersionUID = 1L;
     private static final int DEFAULT_WIDTH = 300;
     private static final int DEFAULT_HEIGHT = 200;
 
-    public SimpleFrame()
+    public simpleFrame1()
     {
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
