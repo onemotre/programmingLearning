@@ -320,4 +320,201 @@ print("the classes after : " , score)
   print(list1[2:5]) # 从list1[1]到list1[4]的值
   ```
 
+
+
+### 6.3 元组
+
+> 采用圆括号，而不是方括号来标识
+
+- 元组与列表的区别
+
+  元组的元素不能进行修改
+
+- 创建元组
+
+  ```python
+  tup = (1,2,3)
+  tup = (); //创建一个空元组
+  ```
+
+  **元组中只包含一个元素的时候需要在元素之后家逗号**
+
+- 访问元组
+
+  ```python
+  tup = (1,2,3,4,5)
+  print(tup[2]) # 从零开始
+  ```
+
+- 元组的组合
+
+  ```python
+  tup1 = (1,2,3)
+  tup2 = (3,4,5)
+  tup3 = tup1 + tup2 # tup3 is (1,2,3,3,4,5)
+  ```
+
+- 元组的修改
+
+  将元组转换成列表再进行修改
+
+- 元组的删除
+
+  ```python
+  tup = (1,2,3,4)
+  del tup # tup is not exist
+  ```
+
+  元组不能只删除一个元素，只能整个删除
+
+- others
+
+  | 表达式       | 作用 |
+  | ------------ |  ------------ |
+  | len(tup)     |       计算长度     |
+  | tup1 + tup2  |       元组叠加     |
+  | 3 in tup     |       元素是否存在 |
+  | tup * 4      |       元组的复制   |
+  | for x in tup |       元组的遍历   |
+  | tup.count(4) | 某数（4）在元组中 |
+  | tup.index(n) | n在tup中所在位置的下标 |
+
+- 元组的索引
+
+  | 表达式 | 作用 |
+  | -------- | --------- |
+  | tup[2]   |       下标为2   |
+  | tup[-2]  |       倒数第2个 |
+  | tup[1:2] |       从1到2    |
+
+- 元组的内置函数
+
+  - `len()` 求长度
+  - `max()` 最大值
+  - `min()` 最小值
+
+- 元组与列表的转换
+
+  ```python
+  list1 = [1,2,3]
+  tup = tuple(list1) # now tup has the same element as list1
+  ```
+
   
+
+### 6.4 字典
+
+> 一种可变容器模型，存储任意类型的对象
+
+- 创建字典
+
+  ```python
+  d = {key1 : value1, key2 : value2}
+  ```
+
+  `key : value` 键值对 sample：
+
+  ```python
+  dict1 = {'Alice': '2314', 'Beth', '9120'}
+  ```
+
+  **Warning：** **键的值必须唯一，值不必**
+
+- 访问字典的值
+
+  ```python
+  dict = {'name':'runoob'}
+  print(dict['name']) ## is runoob
+  ```
+
+  如果访问不存在的键：
+
+  ```python
+  dic = {'a':1, 'b':2}
+  print(dic['c']) # warning
+  ```
+
+  - 遍历字典
+
+    ```python
+    dic = {'Alice': '2314', 'Beth', '9120'}
+    
+    for i in dic:
+        ## 遍历字典的键（key）
+        print (i) # i is key
+        
+        ## 遍历字典的值（values）
+       	print(dic[i]) # print values
+    ```
+
+    ```python
+    ## 遍历字典的另一种方法
+    dic = {'Alice': '2314', 'Beth', '9120'}
+    
+    for i in dic.key():
+        print(i) # i is keys
+    for i in dic.values():
+        print(i) # i is values
+    ```
+
+- 添加（修改）字典
+
+  ```python
+  dic = {'Alice': '2314', 'Beth', '9120'}
+  dic['Beth'] = '8122' # 更新值
+  dic['Carl'] = '9120' # 添加键值对
+  ```
+
+- 删除字典中的值
+
+  ```python
+  dic = {'Alice': '2314', 'Beth', '9120'}
+  del dic['Alice'] # 删除键‘Alice’
+  dic.clear() # 清空字典
+  ```
+
+  
+
+#### 字典键的特性
+
+1. 同一个键不能出现两次，创建时如果同一个键被赋值两次，后一个键被记住
+2. 键必须不能改变，键可以用字符串，数字，元组进行
+
+
+
+#### 字典的内置函数
+
+| 表达式    | 作用                         |
+| --------- | ---------------------------- |
+| len(dic)  | 计算字典元素个数，键的综合苏 |
+| str(dic)  | 输出字典                     |
+| type(dic) | 字典的类型 <'class' dict>    |
+
+
+
+#### 检验字典中是否存在某个值
+
+- 方法一：使用自带方法`has_key()`
+
+- 方法二：`if`与`not in`结合
+
+  ```python
+  dic = {'Alice': '2314', 'Beth', '9120'}
+  if 'Ben' not in dic:
+      print('not exist')
+  ```
+
+- 方法三：异常捕获
+
+  ```python
+  dic = {'Alice': '2314', 'Beth', '9120'}
+  try:
+      print(dic['Ben'])
+  except Exception as err:
+      print("not exist")
+  ```
+
+  
+
+
+
