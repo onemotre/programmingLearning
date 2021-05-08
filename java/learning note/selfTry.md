@@ -443,3 +443,37 @@ public class schedual implements Comparable<schedual>
 
 
 
+## herit
+
+> @ version: 2021.4.20
+>
+> manage family members
+>
+> this is a program to calculate how much herit will a son get
+
+### logical construct
+
+- @class: son
+
+  a object to discribe a son
+
+- input information
+
+  - number of sons
+  - the sum of money you have
+  - sons' name 
+  - the rate a son get
+
+### class: son
+
+> using for manage sons in a family
+
+#### @parm:
+
+- name
+  - discribe a name's name
+- rate
+  - the rate
+- money
+  - the money your son will get
+

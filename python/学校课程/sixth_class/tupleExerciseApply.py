@@ -1,0 +1,6 @@
+score = (68,87,92,100,76,88,54,89,76,61)
+print(score[3])
+print(score[0:6])
+print(score.count(76))
+print(score.index(score.max())+1)
+print(len(score))
