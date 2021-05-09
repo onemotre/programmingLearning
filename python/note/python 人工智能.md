@@ -1,4 +1,4 @@
-# python 人工智能 
+# python 人工智能
 
 > by school
 >
@@ -516,5 +516,91 @@ print("the classes after : " , score)
 
   
 
+## 7. Time模块
+
+### 7.1 捕获当前时间戳
+
+**时间戳：**距离从1970.1.1（纪元）到某个时间的毫秒数
+
+```python
+import time
+ticks = time.time()
+print(ticks)
+```
+
+### 7.2 时间戳与时间元组的转化
+
+#### 时间元组
+
+示例：
+
+```shell
+time.struct_time(tm_year=1970, tm_mon=1, tm_mday=7, tm_hour=15, tm_min=53, tm_sec=52, tm_wday=2, tm_yday=7, tm_isdst=0)
+```
 
 
+
+```python
+import time
+tick = 5465213.21321 # 距离纪元的毫秒数
+aTimeTuple = time.localtime(tick)
+```
+
+可以通过调用`aTimeTuple.tm_year`等方式获取其中的值
+
+
+
+#### 格式化日期
+
+![img](https://i.loli.net/2021/05/09/z8sdpJ9uSk2hRQf.jpg)
+
+![img](https://i.loli.net/2021/05/09/R8gPT9Oo1qBkVyI.jpg)
+
+#### 使用asctime进行时间的格式化
+
+![img](https://i.loli.net/2021/05/09/o7ezXCO8TKPuiGx.jpg)
+
+### 7.3 其他方法
+
+![img](https://i.loli.net/2021/05/09/r9fAZ2du7JYDiOG.jpg)
+
+![img](https://i.loli.net/2021/05/09/r9fAZ2du7JYDiOG.jpg)
+
+![img](https://i.loli.net/2021/05/09/T4OhiBoygwSZtmC.jpg)
+
+![img](https://i.loli.net/2021/05/09/T4OhiBoygwSZtmC.jpg)
+
+![img](https://i.loli.net/2021/05/09/2kqN1r6CVhKYByS.jpg)
+
+### Sleep函数使用
+
+![img](https://i.loli.net/2021/05/09/ZJQl3eL9GoCjspN.jpg)
+
+
+
+## 8. 海龟绘图
+
+### 8.1 创建画布
+
+- 创建一个画布
+
+```python
+import turtle
+t = turtle.Pen()
+```
+
+- 擦拭画布
+
+```python
+t.reset()
+```
+
+
+
+### 8.2 画笔操作
+
+![img](C:/Users/onemotre/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg)
+
+![img](C:/Users/onemotre/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg)
+
+![img](C:/Users/onemotre/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg)
